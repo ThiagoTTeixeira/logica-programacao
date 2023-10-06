@@ -19,8 +19,7 @@ function mediaAluno() {
     // console.log("A 2° nota é: " , nota2);
     // console.log("A 3° nota é: " , nota3);
 
-    document.getElementById('resultado').innerHTML = 'A média do aluno é: ' + media + '<br>';
-'   '
+
 
     if (media >= 7) {
         result = "APROVADO";
@@ -34,6 +33,5 @@ function mediaAluno() {
         document.getElementById('resultado2').innerHTML = 'A média do aluno é: ' + media + '<br>' + result;
     }
     
-    document.getElementById('resul').innerHTML = 'A média do aluno é: ' + result;
 }
 
