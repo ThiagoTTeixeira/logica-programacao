@@ -1,7 +1,21 @@
-table, td ,th{
+td ,th{
     border: 1px solid;
     text-align: center;
 }
+
+table{
+    display: flex;
+    justify-content: center;
+}
+.ConfirmarVoto{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
 th{
     padding: 10px;
+}
+
+input{
+    width: 80px;
 }
