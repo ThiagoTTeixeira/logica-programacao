@@ -36,26 +36,26 @@ function urnaEletronica(){
     porcentagem = (candidato1 + candidato2 + candidato3 + votoBranco + votoNulo)/100
     if (candidato1 > candidato2 && candidato1 > candidato3){
         console.log("\n")
-        console.log("Ganhador foi Candidato 1 ", (candidato1/porcentagem))
+        console.log("Ganhador foi Candidato 1 ", ((candidato1+votoBranco)/porcentagem))
         console.log("Candidato 2 ", (candidato2/porcentagem))
         console.log("Candidato 3 ", (candidato3/porcentagem))
         console.log("Votos em Branco ", (votoBranco/porcentagem))
         console.log("Votos nulo", (votoNulo/porcentagem))
     } else  if (candidato2 > candidato1 && candidato2 > candidato3){
         console.log("\n")
-        console.log("Ganhador foi Candidato 2 ", (candidato2/porcentagem))
+        console.log("Ganhador foi Candidato 2 ", ((candidato2+votoBranco)/porcentagem))
         console.log("Candidato 1 ", (candidato1/porcentagem))
         console.log("Candidato 3 ", (candidato3/porcentagem))
         console.log("Votos em Branco ", (votoBranco/porcentagem))
         console.log("Votos nulo", (votoNulo/porcentagem))
     } else  if (candidato3 > candidato2 && candidato3 > candidato1){
         console.log("\n")
-        console.log("Ganhador foi Candidato 3 ", (candidato3/porcentagem))
+        console.log("Ganhador foi Candidato 3 ", ((candidato3+votoBranco)/porcentagem))
         console.log("Candidato 1 ", (candidato1/porcentagem))
         console.log("Candidato 2 ", (candidato2/porcentagem))
         console.log("Votos em Branco ", (votoBranco/porcentagem))
         console.log("Votos nulo", (votoNulo/porcentagem))
-    }  else {
+    }    else {
         console.log("\n")
         console.log("Empate! ") 
         console.log("Cndidato 1 ", (candidato1/porcentagem))
