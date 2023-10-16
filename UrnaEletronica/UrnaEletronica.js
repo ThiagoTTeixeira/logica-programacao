@@ -6,12 +6,12 @@ function urnaEletronica(){
     var votoBranco = 0;
     var votoNulo = 0;
     var porcentagem = 0;
-    var votos = []
+    var votos = [0]
     var candidatos = [""]
     var cotcand = 0
     cotcand = parseInt(prompt("Quantos candidatos serão? Somente números inteiros"))
     for(var i = 1, c= 1;candidatos.length<cotcand+1; i++, c++){
-        candidatos[i]= prompt("Digite o nome do "+ c+ "° candidato")
+        candidatos.push( prompt("Digite o nome do "+ c+ "° candidato"))
     }
 
     for(var voto, v=0;voto != 0; v++){
@@ -22,12 +22,12 @@ function urnaEletronica(){
         } else if (voto == 0){
             alert("Votação encerrada")
             v--
-        }else if (votos == cotcand + 1){
+        }else if (voto == cotcand + 1){
             votoBranco++
-        }else if (votos == cotcand + 2){
+        }else if (voto == cotcand + 2){
             votoNulo++
         }else {
-            votos[votos.length]++
+            votos[voto] = votos[voto]++
         }
 
     }
@@ -35,7 +35,7 @@ function urnaEletronica(){
     porcentagem = (v/100)
     for(var i = 1; i < candidatos.length;i++){
         var result = votos[i]
-        console.log(candidatos[i]+ " terminou com "+ (result / porcentagem)+ "% de votos")
+        console.log(candidatos[i], " terminou com ", (result / porcentagem), "% de votos")
     }
     console.log("Votos em Branco ", (votoBranco/porcentagem), "% de votos")
     console.log("Votos nulo ", (votoNulo/porcentagem), "% de votos")
