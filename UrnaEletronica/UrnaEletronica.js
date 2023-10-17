@@ -15,7 +15,7 @@ function urnaEletronica(){
     nomecand2 = prompt("Digite o nome do segundo candidato")
     nomecand3 = prompt("Digite o nome do terceiro candidato")
 
-    for(var voto, r;r != 'S';){
+    for(var voto, r;senhac != senha;){
         voto = parseInt(prompt("Digite: "+ "\n"+
         "1 para votar em "+ nomecand1+ "\n"+
         "2 para votar em "+ nomecand2+ "\n"+
