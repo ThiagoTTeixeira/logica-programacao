@@ -15,7 +15,7 @@ function urnaEletronica(){
     nomecand2 = prompt("Digite o nome do segundo candidato")
     nomecand3 = prompt("Digite o nome do terceiro candidato")
 
-    for(var voto, r;senhac != senha;){
+    for(var voto, r, t = 0;t== 0;){
         voto = parseInt(prompt("Digite: "+ "\n"+
         "1 para votar em "+ nomecand1+ "\n"+
         "2 para votar em "+ nomecand2+ "\n"+
@@ -48,6 +48,7 @@ function urnaEletronica(){
                         senhac = prompt("Digite a senha para encerrar a votação?")
                         if (senhac == senha){ 
                             alert("Votação encerrada")
+                            t++
                         }
                         else{
                             alert("Senha incorreta, digite novamente")
