@@ -9,6 +9,7 @@ function urnaEletronica(){
     var votoBranco = 0;
     var votoNulo = 0;
     var porcentagem = 0;
+    var senha = prompt("Qual a senha para encerramento da votação?")
 
     nomecand1 = prompt("Digite o nome do primeiro candidato")
     nomecand2 = prompt("Digite o nome do segundo candidato")
@@ -43,7 +44,16 @@ function urnaEletronica(){
             for (;r != "S" || r != "N"){
                 r = prompt("Deseja encerrar a votação? Se sim, digite S se não, digite N");
                 if (r == "S"){
-                    alert("Votação encerrada")
+                    for(var senhac; senhac != senha){
+                        senhac = prompt("Digite a senha para encerrar a votação?")
+                        if (senhac == senha){ 
+                            alert("Votação encerrada")
+                        }
+                        else{
+                            alert("Senha incorreta, digite novamente")
+                        }
+                    }
+                    
                 }
                 else{
                     alert("Votação irá continuar normalmente")
