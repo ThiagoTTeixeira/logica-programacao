@@ -40,12 +40,14 @@ function urnaEletronica(){
             console.log("Você computado para Voto Nulo.")
             votoNulo++;
         } else if(voto == 0){
-            r = prompt("Deseja encerrar a votação? Se sim, digite S se não, digite N");
-            if (r == "S"){
-                alert("Votação encerrada")
-            }
-            else{
-                alert("Votação irá continuar normalmente")
+            for (;r != "S" || r != "N"){
+                r = prompt("Deseja encerrar a votação? Se sim, digite S se não, digite N");
+                if (r == "S"){
+                    alert("Votação encerrada")
+                }
+                else{
+                    alert("Votação irá continuar normalmente")
+                }
             }
         } else{
             alert("Numero invalido")
