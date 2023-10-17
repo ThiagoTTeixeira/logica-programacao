@@ -41,10 +41,10 @@ function urnaEletronica(){
             console.log("Você computado para Voto Nulo.")
             votoNulo++;
         } else if(voto == 0){
-            for (;r != "S" || r != "N"){
+            for (;r != "S" || r != "N";){
                 r = prompt("Deseja encerrar a votação? Se sim, digite S se não, digite N");
                 if (r == "S"){
-                    for(var senhac; senhac != senha){
+                    for(var senhac; senhac != senha;){
                         senhac = prompt("Digite a senha para encerrar a votação?")
                         if (senhac == senha){ 
                             alert("Votação encerrada")
