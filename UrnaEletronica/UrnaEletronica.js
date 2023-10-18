@@ -15,7 +15,7 @@ function urnaEletronica(){
     nomecand2 = prompt("Digite o nome do segundo candidato")
     nomecand3 = prompt("Digite o nome do terceiro candidato")
 
-    for(var voto, r, t = 0;t== 0;){
+    for(var voto, r, t = 0; t == 0;){
         voto = parseInt(prompt("Digite: "+ "\n"+
         "1 para votar em "+ nomecand1+ "\n"+
         "2 para votar em "+ nomecand2+ "\n"+
@@ -41,23 +41,30 @@ function urnaEletronica(){
             console.log("Você computado para Voto Nulo.")
             votoNulo++;
         } else if(voto == 0){
-            for (;r != "S" || r != "N";){
-                r = prompt("Deseja encerrar a votação? Se sim, digite S se não, digite N");
+            r = prompt("Deseja encerrar a votação? Se sim, digite S se não, digite N");
+            for (var p = 0;p <= 0;){
                 if (r == "S"){
-                    for(var senhac; senhac != senha;){
-                        senhac = prompt("Digite a senha para encerrar a votação?")
+                    senhac = prompt("Digite a senha para encerrar a votação")
+                    for(var w = 0; w <= 0;) {
                         if (senhac == senha){ 
                             alert("Votação encerrada")
+                            w++
+                            p++
                             t++
                         }
                         else{
                             alert("Senha incorreta, digite novamente")
+                            let y = (prompt("Deseja continuar tentando? Se sim digite S se não digite N"))
+                            if (y == "N"){
+                                w++
+                                p++
+                            }
                         }
                     }
-                    
                 }
                 else{
                     alert("Votação irá continuar normalmente")
+                    p++
                 }
             }
         } else{
