@@ -9,7 +9,7 @@ function urnaEletronica(){
     let votoBranco = 0;
     let votoNulo = 0;
     let porcentagem = 0; 
-    
+    console.clear();
 
     for(let i = false; i != true;){
         nomecand1 = prompt("Digite o nome do primeiro candidato")
@@ -19,7 +19,7 @@ function urnaEletronica(){
         
     }
     let senha = prompt("Qual a senha para encerramento da votação?")
-    for(let voto, j, i = false; i != true;){
+    for(let voto, j, i = false; i != true;porcentagem++){
         voto = parseInt(prompt("Digite: "+ "\n"+
         "1 para votar em "+ nomecand1+ "\n"+
         "2 para votar em "+ nomecand2+ "\n"+
@@ -41,44 +41,48 @@ function urnaEletronica(){
             votoBranco++;
         } else if(voto == senha){
             i = confirm("Você gostaria de encerrar a votação?")
+            porcentagem--
         } else{
             vn = confirm("Deseja votar nulo?")
             if (vn){
                 votoNulo++
             }
+            else{
+                porcentagem--
+            }
         }
 
     }
-    porcentagem = (candidato1 + candidato2 + candidato3 + votoBranco + votoNulo)/100
+    console.clear()
+    console.log("\n")
+    console.log("** BOLETIM DE URNA **")
+    console.log("\n")  
+    console.log("TOTAL DE VOTOS: ", porcentagem)
     if (candidato1 > candidato2 && candidato1 > candidato3){
-        console.log("\n")
-        console.log("Ganhador foi ", nomecand1, " com ", ((candidato1+votoBranco)/porcentagem).toFixed(2), " de votos")
-        console.log(nomecand2, " com ", (candidato2/porcentagem).toFixed(2), " de votos")
-        console.log(nomecand3, " com ", (candidato3/porcentagem).toFixed(2), " de votos")
-        console.log("Votos em Branco ", (votoBranco/porcentagem).toFixed(2), " de votos")
-        console.log("Votos nulo", (votoNulo/porcentagem).toFixed(2), " de votos")
+        console.log("Ganhador foi ", nomecand1, " com ", ((candidato1+votoBranco)/porcentagem*100).toFixed(2), "% de votos")
+        console.log(nomecand2, " com ", (candidato2/porcentagem*100).toFixed(2), "% de votos")
+        console.log(nomecand3, " com ", (candidato3/porcentagem*100).toFixed(2), "% de votos")
+        console.log("Votos em Branco ", (votoBranco/porcentagem*100).toFixed(2), "% de votos")
+        console.log("Votos nulo", (votoNulo/porcentagem*100).toFixed(2), "% de votos")
     } else  if (candidato2 > candidato1 && candidato2 > candidato3){
-        console.log("\n")
-        console.log("Ganhador foi ", nomecand2, " com ", ((candidato2+votoBranco)/porcentagem), " de votos")
-        console.log(nomecand1, " com ", (candidato1/porcentagem).toFixed(2), " de votos")
-        console.log(nomecand3, " com ", (candidato3/porcentagem).toFixed(2), " de votos")
-        console.log("Votos em Branco ", (votoBranco/porcentagem).toFixed(2), " de votos")
-        console.log("Votos nulo", (votoNulo/porcentagem).toFixed(2), " de votos")
+        console.log("Ganhador foi ", nomecand2, " com ", ((candidato2+votoBranco)/porcentagem), "% de votos")
+        console.log(nomecand1, " com ", (candidato1/porcentagem*100).toFixed(2), "% de votos")
+        console.log(nomecand3, " com ", (candidato3/porcentagem*100).toFixed(2), "% de votos")
+        console.log("Votos em Branco ", (votoBranco/porcentagem*100).toFixed(2), "% de votos")
+        console.log("Votos nulo", (votoNulo/porcentagem*100).toFixed(2), "% de votos")
     } else  if (candidato3 > candidato2 && candidato3 > candidato1){
-        console.log("\n")
-        console.log("Ganhador foi ", nomecand3, " com ", ((candidato3+votoBranco)/porcentagem).toFixed(2), " de votos")
-        console.log(nomecand1, " com ", (candidato1/porcentagem).toFixed(2), " de votos")
-        console.log(nomecand2, " com ", (candidato2/porcentagem).toFixed(2), " de votos")
-        console.log("Votos em Branco ", (votoBranco/porcentagem).toFixed(2), " de votos")
-        console.log("Votos nulo", (votoNulo/porcentagem).toFixed(2), " de votos")
+        console.log("Ganhador foi ", nomecand3, " com ", ((candidato3+votoBranco)/porcentagem*100).toFixed(2), "% de votos")
+        console.log(nomecand1, " com ", (candidato1/porcentagem*100).toFixed(2), "% de votos")
+        console.log(nomecand2, " com ", (candidato2/porcentagem*100).toFixed(2), "% de votos")
+        console.log("Votos em Branco ", (votoBranco/porcentagem*100).toFixed(2), "% de votos")
+        console.log("Votos nulo", (votoNulo/porcentagem*100).toFixed(2), "% de votos")
     }    else {
-        console.log("\n")
         console.log("Empate! ") 
-        console.log(nomecand1, " com ", ((candidato1/porcentagem).toFixed(2)), " de votos")
-        console.log(nomecand2, " com ", (candidato2/porcentagem).toFixed(2), " de votos")
-        console.log(nomecand3, " com ", (candidato3/porcentagem).toFixed(2), " de votos")
-        console.log("Votos em Branco ", (votoBranco/porcentagem).toFixed(2), " de votos")
-        console.log("Votos nulo", (votoNulo/porcentagem).toFixed(2), " de votos")
+        console.log(nomecand1, " com ", ((candidato1/porcentagem*100).toFixed(2)), "% de votos")
+        console.log(nomecand2, " com ", (candidato2/porcentagem*100).toFixed(2), "% de votos")
+        console.log(nomecand3, " com ", (candidato3/porcentagem*100).toFixed(2), "% de votos")
+        console.log("Votos em Branco ", (votoBranco/porcentagem*100).toFixed(2), "% de votos")
+        console.log("Votos nulo", (votoNulo/porcentagem*100).toFixed(2), "% de votos")
     }
 
 }
