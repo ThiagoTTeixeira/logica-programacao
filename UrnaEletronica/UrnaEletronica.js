@@ -10,6 +10,8 @@ function urnaEletronica(){
     let votoNulo = 0;
     let porcentagem = 0; 
     let audioConf = document.getElementById("audioConf")
+    let dataInicio = new Date();
+    
     console.clear();
 
     for(let i = false; i != true;){
@@ -82,12 +84,15 @@ function urnaEletronica(){
                 porcentagem--
             }
         }
-        // audioConf.pause();
+         
 
     }
+    let dataFinal = new Date();
     console.clear()
     console.log("\n")
     console.log("** BOLETIM DE URNA **")
+    console.log("Inicio da voração: "+ dataInicio)
+    console.log("Termino da voração: "+ dataFinal)
     console.log("\n")  
     console.log("TOTAL DE VOTOS: ", porcentagem)
     if (candidato1 > candidato2 && candidato1 > candidato3){
