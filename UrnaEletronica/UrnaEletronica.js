@@ -9,6 +9,7 @@ function urnaEletronica(){
     let votoBranco = 0;
     let votoNulo = 0;
     let porcentagem = 0; 
+    let audioConf = document.getElementById("audioConf")
     console.clear();
 
     for(let i = false; i != true;){
@@ -28,17 +29,46 @@ function urnaEletronica(){
 
     
         if (voto == 1){
-            console.log("Voto computado para ", nomecand1, ".")
-            candidato1++;
+            j = confirm("Confirma o voto no " + nomecand1 + "?")
+            if(j){
+                console.log("Voto computado para ", nomecand1, ".")
+                audioConf.play();
+                candidato1++;
+            }
+            else{
+                porcentagem--
+            }
+            
         } else if (voto == 2){
-            console.log("Voto computado para ", nomecand2, ".")
-            candidato2++;
+            j = confirm("Confirma o voto no " + nomecand2 + "?")
+            if(j){
+                console.log("Voto computado para ", nomecand2, ".")
+                audioConf.play();
+                candidato2++;
+            }
+            else{
+                porcentagem--
+            }
         } else if (voto == 3){
-            console.log("Voto computado para ", nomecand3, ".")
-            candidato3++;
+            j = confirm("Confirma o voto no " + nomecand3 + "?")
+            if(j){
+                console.log("Voto computado para ", nomecand3, ".")
+                audioConf.play();
+                candidato3++;
+            }
+            else{
+                porcentagem--
+            }
         } else if (voto == 5){
-            console.log("Você computado para Voto em Branco.")
-            votoBranco++;
+            j = confirm("Confirma o votar em branco?")
+            if(j){
+                console.log("Voto computado para voto em branco.")
+                audioConf.play();
+                votoBranco++;
+            }
+            else{
+                porcentagem--
+            }
         } else if(voto == senha){
             i = confirm("Você gostaria de encerrar a votação?")
             porcentagem--
@@ -46,11 +76,13 @@ function urnaEletronica(){
             vn = confirm("Deseja votar nulo?")
             if (vn){
                 votoNulo++
+                audioConf.play();
             }
             else{
                 porcentagem--
             }
         }
+        // audioConf.pause();
 
     }
     console.clear()

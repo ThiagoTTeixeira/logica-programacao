@@ -2,6 +2,9 @@ td ,th{
     border: 1px solid;
     text-align: center;
 }
+audio{
+    display: none;
+}
 
 table{
     display: flex;
