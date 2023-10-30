@@ -1,15 +1,17 @@
 
 function urnaEletronica(){
-    // var candidato1 = 0;
-    // var candidato2 = 0;
-    // var candidato3 = 0;
     var votoBranco = 0;
     var votoNulo = 0;
     var porcentagem = 0;
     var votos = [0]
     var candidatos = [""]
     var cotcand = 0
+    let audioConf = document.getElementById("audioConf")
+    let dataInicio = new Date();
     cotcand = parseInt(prompt("Quantos candidatos serão? Somente números inteiros"))
+    for(var i = 0; i <= cotcand;i++){
+        votos.push(0)
+    }
     for(var i = 1, c= 1;candidatos.length<cotcand+1; i++, c++){
         candidatos.push( prompt("Digite o nome do "+ c+ "° candidato"))
     }
@@ -24,52 +26,30 @@ function urnaEletronica(){
             v--
         }else if (voto == cotcand + 1){
             votoBranco++
+            audioConf.play()
         }else if (voto == cotcand + 2){
             votoNulo++
+            audioConf.play()
         }else {
-            votos[voto] = votos[voto]++
+            votos[voto]++
+            audioConf.play()
         }
 
     }
-
+    let dataFinal = new Date();
+    console.clear()
+    console.log("\n")
+    console.log("** BOLETIM DE URNA **")
+    console.log("Inicio da voração: "+ dataInicio)
+    console.log("Termino da voração: "+ dataFinal)
+    console.log("\n")  
+    console.log("TOTAL DE VOTOS: ", v)
     porcentagem = (v/100)
     for(var i = 1; i < candidatos.length;i++){
         var result = votos[i]
-        console.log(candidatos[i], " terminou com ", (result / porcentagem), "% de votos")
+        console.log(candidatos[i], " terminou com ", (result / porcentagem).toFixed(2), "% de votos")
     }
-    console.log("Votos em Branco ", (votoBranco/porcentagem), "% de votos")
-    console.log("Votos nulo ", (votoNulo/porcentagem), "% de votos")
+    console.log("Votos em Branco ", (votoBranco/porcentagem).toFixed(2), "% de votos")
+    console.log("Votos nulo ", (votoNulo/porcentagem).toFixed(2), "% de votos")
     
-    
-//     if (candidato1 > candidato2 && candidato1 > candidato3){
-//         console.log("\n")
-//         console.log("Ganhador foi Candidato 1 ", ((candidato1+votoBranco)/porcentagem))
-//         console.log("Candidato 2 ", (candidato2/porcentagem))
-//         console.log("Candidato 3 ", (candidato3/porcentagem))
-//         console.log("Votos em Branco ", (votoBranco/porcentagem))
-//         console.log("Votos nulo", (votoNulo/porcentagem))
-//     } else  if (candidato2 > candidato1 && candidato2 > candidato3){
-//         console.log("\n")
-//         console.log("Ganhador foi Candidato 2 ", ((candidato2+votoBranco)/porcentagem))
-//         console.log("Candidato 1 ", (candidato1/porcentagem))
-//         console.log("Candidato 3 ", (candidato3/porcentagem))
-//         console.log("Votos em Branco ", (votoBranco/porcentagem))
-//         console.log("Votos nulo", (votoNulo/porcentagem))
-//     } else  if (candidato3 > candidato2 && candidato3 > candidato1){
-//         console.log("\n")
-//         console.log("Ganhador foi Candidato 3 ", ((candidato3+votoBranco)/porcentagem))
-//         console.log("Candidato 1 ", (candidato1/porcentagem))
-//         console.log("Candidato 2 ", (candidato2/porcentagem))
-//         console.log("Votos em Branco ", (votoBranco/porcentagem))
-//         console.log("Votos nulo", (votoNulo/porcentagem))
-//     }    else {
-//         console.log("\n")
-//         console.log("Empate! ") 
-//         console.log("Cndidato 1 ", (candidato1/porcentagem))
-//         console.log("Candidato 2 ", (candidato2/porcentagem))
-//         console.log("Candidato 3 ", (candidato3/porcentagem))
-//         console.log("Votos em Branco ", (votoBranco/porcentagem))
-//         console.log("Votos nulo", (votoNulo/porcentagem))
-//     }
-
  }

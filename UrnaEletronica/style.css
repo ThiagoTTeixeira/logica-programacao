@@ -3,6 +3,10 @@ td ,th{
     text-align: center;
 }
 
+audio{
+    display: none;
+}
+
 table{
     display: flex;
     justify-content: center;
