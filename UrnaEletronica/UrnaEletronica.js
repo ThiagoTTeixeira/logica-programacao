@@ -8,28 +8,54 @@ function urnaEletronica(){
     var cotcand = 0
     let audioConf = document.getElementById("audioConf")
     let dataInicio = new Date();
-    cotcand = parseInt(prompt("Quantos candidatos serão? Somente números inteiros"))
-    for(var i = 0; i <= cotcand;i++){
-        votos.push(0)
-    }
-    for(var i = 1, c= 1;candidatos.length<cotcand+1; i++, c++){
-        candidatos.push( prompt("Digite o nome do "+ c+ "° candidato"))
-    }
+    let senha = 123
 
-    for(var voto, v=0;voto != 0; v++){
+    let w = confirm("Você gostaria de configurar os candidatos? Se deseja usar o predefinido clique em cancelar")
+    if (w){
+        cotcand = parseInt(prompt("Quantos candidatos serão? Somente números inteiros"))
+        for(var i = 0; i <= cotcand;i++){
+            votos.push(0)
+        }
+        for(var i = 1, c= 1;candidatos.length<cotcand+1; i++, c++){
+            candidatos.push( prompt("Digite o nome do "+ c+ "° candidato"))
+        }
+    }else{
+        
+    }
+    
+
+    for(var voto,f = false, v=0;f == false; v++){
         voto = parseInt(prompt("Digite seu voto"));
         if (voto > (cotcand+2)){
             alert("Número Invalido")
             v--
-        } else if (voto == 0){
-            alert("Votação encerrada")
+        } else if (voto == senha){
             v--
+            let y = confirm("Deseja encerrar a votação?")
+            if(y){
+                alert("Votação encerrada")
+                f = true
+            }
+            
         }else if (voto == cotcand + 1){
-            votoBranco++
-            audioConf.play()
+            y = confirm("Deseja encerrar a votação?")
+            if(y){
+                alert("Voto computado para voto em branco")
+                votoBranco++
+                audioConf.play()
+            }else{
+                v--
+            }
+            
         }else if (voto == cotcand + 2){
-            votoNulo++
-            audioConf.play()
+            y = confirm("Deseja encerrar a votação?")
+            if(y){
+                alert("Voto computado para voto em branco")
+                votoNulo++
+                audioConf.play()
+            }else{
+                v--
+            }
         }else {
             votos[voto]++
             audioConf.play()
