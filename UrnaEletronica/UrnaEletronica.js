@@ -51,22 +51,23 @@ function urnaEletronica(){
                     }
 
                 }else{
-                    for (;candidatos[voto][1] != "";){
+                    for (y;candidatos[voto][1] != "" && y != true;){
                         for(p = false, i=0; p != true; i++){
                             if(voto == candidatos[i][0]){
-                                votos[i]++
-                                
+                                confirmaVoto = confirm("Você confirma o voto no candidato "+ candidatos[i][1]+"?")
+                                if (confirmaVoto){
+                                    votos[voto]++
+                                }else {
+                                    v--
+                                }
+                                p = true
                             }
                         }
-                        confirmaVoto = confirm("Você confirma o voto no candidato "+ candidatos[i][1]+"?")
-                        if (confirmaVoto){
-                            votos[voto]++
-                        }else {
-                            v--
-                        }
-                }
-                w = true
-            }
+                    y = true        
+                    }
+                    w = true
+                }    
+                
         }
     }
 
@@ -108,5 +109,4 @@ function urnaEletronica(){
         
     }
 }
-
-
+}
