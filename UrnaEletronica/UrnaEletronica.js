@@ -1,125 +1,112 @@
-
 function urnaEletronica(){
-    let candidato1 = 0;
-    let nomecand1 = "";
-    let candidato2 = 0;
-    let nomecand2 = "";
-    let candidato3 = 0;
-    let nomecand3 = "";
-    let votoBranco = 0;
-    let votoNulo = 0;
-    let porcentagem = 0; 
-    let audioConf = document.getElementById("audioConf")
-    let dataInicio = new Date();
-    
-    console.clear();
-
-    for(let i = false; i != true;){
-        nomecand1 = prompt("Digite o nome do primeiro candidato")
-        nomecand2 = prompt("Digite o nome do segundo candidato")
-        nomecand3 = prompt("Digite o nome do terceiro candidato")
-        i = confirm("Você esta contente com os nomes dos candidatos?" + "\n" + nomecand1 + "\n" + nomecand2 + "\n" + nomecand3)
-        
+    let candidatos = [
+        [1, "Kauan"],
+        [2, "Jasson"],
+        [3, "Juliana"],
+        [4, "Thiago"],
+        [5, "Hian"]
+    ]
+    let votos=[]
+    let voto
+    votoNulo = 0
+    votoBranco = 0
+    let senha = 123
+    let configCand = confirm("Você gostaria de configurar os candidatos?")
+    if (configCand){
+        config()
     }
-    let senha = prompt("Qual a senha para encerramento da votação?")
-    for(let voto, j, i = false; i != true;porcentagem++){
-        voto = parseInt(prompt("Digite: "+ "\n"+
-        "1 para votar em "+ nomecand1+ "\n"+
-        "2 para votar em "+ nomecand2+ "\n"+
-        "3 para votar em "+ nomecand3+ "\n"+
-        "5 para Votar Branco"));
+    configCand = !confirm("Você gostaria de configurar a senha?")
+    if(configCand == false){
+        config()
+    }
+    for (i = 0; i < 5; i++){
+        if (votos.length< candidatos[i][0]){
+            votos.push(0)
+        }
+    }
+    for(let s = true, v = 0; s == true; v++){
+        voto = parseInt(prompt("Digite sua opção"))
+        let dataInicio = new Date();
+        if (voto == senha){
+            s = !confirm("Você gostaria de encerrar a votação?")
+            v--
+            if(s == false){
+                let dataFinal= new Date()
+            }
+        }else{
+            for (let w = false, i = 0, confirmaVoto = false; w == false; i++){
+                if(i > 4 && voto != candidatos[i][0] && voto != 69){
+                    confirmaVoto = confirm("Você confirma o voto nulo?")
+                    if(confirmavoto){
+                        votoNulo++
+                    }else{
+                        v--
+                    }
+                }else if (voto == 69){
+                    confirmaVoto = confirm("Você confirma o voto branco?")
+                    if(confirmaVoto){
+                        votoBranco++
+                    }else{
+                        v--
+                    }
 
-    
-        if (voto == 1){
-            j = confirm("Confirma o voto no " + nomecand1 + "?")
-            if(j){
-                console.log("Voto computado para ", nomecand1, ".")
-                audioConf.play();
-                candidato1++;
-            }
-            else{
-                porcentagem--
-            }
-            
-        } else if (voto == 2){
-            j = confirm("Confirma o voto no " + nomecand2 + "?")
-            if(j){
-                console.log("Voto computado para ", nomecand2, ".")
-                audioConf.play();
-                candidato2++;
-            }
-            else{
-                porcentagem--
-            }
-        } else if (voto == 3){
-            j = confirm("Confirma o voto no " + nomecand3 + "?")
-            if(j){
-                console.log("Voto computado para ", nomecand3, ".")
-                audioConf.play();
-                candidato3++;
-            }
-            else{
-                porcentagem--
-            }
-        } else if (voto == 5){
-            j = confirm("Confirma o votar em branco?")
-            if(j){
-                console.log("Voto computado para voto em branco.")
-                audioConf.play();
-                votoBranco++;
-            }
-            else{
-                porcentagem--
-            }
-        } else if(voto == senha){
-            i = confirm("Você gostaria de encerrar a votação?")
-            porcentagem--
-        } else{
-            vn = confirm("Deseja votar nulo?")
-            if (vn){
-                votoNulo++
-                audioConf.play();
-            }
-            else{
-                porcentagem--
+                }else{
+                    for (;candidatos[voto][1] != "";){
+                        for(p = false, i=0; p != true; i++){
+                            if(voto == candidatos[i][0]){
+                                votos[i]++
+                                
+                            }
+                        }
+                        confirmaVoto = confirm("Você confirma o voto no candidato "+ candidatos[i][1]+"?")
+                        if (confirmaVoto){
+                            votos[voto]++
+                        }else {
+                            v--
+                        }
+                }
+                w = true
             }
         }
-         
-
     }
-    let dataFinal = new Date();
+
+
+    
+    
+    
+    
+    
+    let porcentagem = v/100
     console.clear()
     console.log("\n")
     console.log("** BOLETIM DE URNA **")
     console.log("Inicio da voração: "+ dataInicio)
     console.log("Termino da voração: "+ dataFinal)
     console.log("\n")  
-    console.log("TOTAL DE VOTOS: ", porcentagem)
-    if (candidato1 > candidato2 && candidato1 > candidato3){
-        console.log("Ganhador foi ", nomecand1, " com ", ((candidato1+votoBranco)/porcentagem*100).toFixed(2), "% de votos")
-        console.log(nomecand2, " com ", (candidato2/porcentagem*100).toFixed(2), "% de votos")
-        console.log(nomecand3, " com ", (candidato3/porcentagem*100).toFixed(2), "% de votos")
-        console.log("Votos em Branco ", (votoBranco/porcentagem*100).toFixed(2), "% de votos")
-        console.log("Votos nulo", (votoNulo/porcentagem*100).toFixed(2), "% de votos")
-    } else  if (candidato2 > candidato1 && candidato2 > candidato3){
-        console.log("Ganhador foi ", nomecand2, " com ", ((candidato2+votoBranco)/porcentagem), "% de votos")
-        console.log(nomecand1, " com ", (candidato1/porcentagem*100).toFixed(2), "% de votos")
-        console.log(nomecand3, " com ", (candidato3/porcentagem*100).toFixed(2), "% de votos")
-        console.log("Votos em Branco ", (votoBranco/porcentagem*100).toFixed(2), "% de votos")
-        console.log("Votos nulo", (votoNulo/porcentagem*100).toFixed(2), "% de votos")
-    } else  if (candidato3 > candidato2 && candidato3 > candidato1){
-        console.log("Ganhador foi ", nomecand3, " com ", ((candidato3+votoBranco)/porcentagem*100).toFixed(2), "% de votos")
-        console.log(nomecand1, " com ", (candidato1/porcentagem*100).toFixed(2), "% de votos")
-        console.log(nomecand2, " com ", (candidato2/porcentagem*100).toFixed(2), "% de votos")
-        console.log("Votos em Branco ", (votoBranco/porcentagem*100).toFixed(2), "% de votos")
-        console.log("Votos nulo", (votoNulo/porcentagem*100).toFixed(2), "% de votos")
-    }    else {
-        console.log("Empate! ") 
-        console.log(nomecand1, " com ", ((candidato1/porcentagem*100).toFixed(2)), "% de votos")
-        console.log(nomecand2, " com ", (candidato2/porcentagem*100).toFixed(2), "% de votos")
-        console.log(nomecand3, " com ", (candidato3/porcentagem*100).toFixed(2), "% de votos")
-        console.log("Votos em Branco ", (votoBranco/porcentagem*100).toFixed(2), "% de votos")
-        console.log("Votos nulo", (votoNulo/porcentagem*100).toFixed(2), "% de votos")
+    console.log("TOTAL DE VOTOS: ", v)
+    for(var i = 0; i <= 99;i++){
+        var result = votos[i]
+        console.log(candidatos[i], " terminou com ", (result / porcentagem).toFixed(2), "% de votos")
     }
 
+    function config(){
+        if (configCand){
+            for (i = 0; i < 5; i++){
+                candidatos[i][0] = prompt("Digite o n° do "+ (i + 1) +" candidato")
+                for(;candidatos[i][0] == 69 | candidatos[i][0] > 99;){
+                    candidatos[i][0] = prompt("´Número indisponivel, não podeser 69, e nem maior que 99. Digite outro")
+                }
+                candidatos[i][1] = prompt("Digite o nome do "+ (i + 1) +" candidato")
+                
+            }
+            return candidatos
+        }
+        else{
+            senha = prompt("Digite a nova senha")
+            return senha
+        }
+        
+    }
 }
+
+
