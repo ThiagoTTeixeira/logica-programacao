@@ -1,81 +1,132 @@
+async function audioConfirmacao() {
+    const audio = new Audio('./audio/confirmacao.mp3');
+    await audio.play();
+}
 
-function urnaEletronica(){
-    var votoBranco = 0;
-    var votoNulo = 0;
-    var porcentagem = 0;
-    var votos = [0]
-    var candidatos = [""]
-    var cotcand = 0
-    let audioConf = document.getElementById("audioConf")
-    let dataInicio = new Date();
-    let senha = 123
+async function verificarIntegridadeUrna() {
+    let hashUrnaAtual;
+    let hashVerificado;
 
-    let w = confirm("Você gostaria de configurar os candidatos? Se deseja usar o predefinido clique em cancelar")
-    if (w){
-        cotcand = parseInt(prompt("Quantos candidatos serão? Somente números inteiros"))
-        for(var i = 0; i <= cotcand;i++){
-            votos.push(0)
-        }
-        for(var i = 1, c= 1;candidatos.length<cotcand+1; i++, c++){
-            candidatos.push( prompt("Digite o nome do "+ c+ "° candidato"))
-        }
-    }else{
+    await fetch('urnaEletronica.js')
+        .then(conteudo => conteudo.text())
+        .then(conteudo => CryptoJS.SHA256(conteudo).toString())
+        .then(conteudo => hashUrnaAtual = conteudo);
+    
+    await fetch('hashVerificado')
+        .then(conteudo => conteudo.text())
+        .then(conteudo => hashVerificado = conteudo);
         
-    }
-    
+    return {
+        status: hashUrnaAtual === hashVerificado,
+        hashUrnaAtual: hashUrnaAtual,
+        hashVerificado: hashVerificado
+    };
 
-    for(var voto,f = false, v=0;f == false; v++){
-        voto = parseInt(prompt("Digite seu voto"));
-        if (voto > (cotcand+2)){
-            alert("Número Invalido")
+}
+async function urnaEletronica(){
+    let candidatos = [
+        [1, "Kauan"],
+        [2, "Jasson"],
+        [3, "Juliana"],
+        [4, "Thiago"],
+        [5, "Hian"]
+    ]
+    let votos=[]
+    let voto
+    let dataFinal
+    let dataInicio
+    let votoNulo = 0
+    let votoBranco = 0
+    let senha = 123
+    let v = 0
+    let porcentagem
+    configCand = confirm("Você gostaria de configurar a senha?")
+    if(configCand){
+        config()
+    }
+    for (i = 0; i < 5; i++){
+            votos.push(0)
+    }
+    dataInicio = new Date();
+    for(let s = false; s == false; v++){
+        voto = parseInt(prompt("Digite sua opção"))
+        if (voto == senha){
+            s = confirm("Você gostaria de encerrar a votação?")
             v--
-        } else if (voto == senha){
-            v--
-            let y = confirm("Deseja encerrar a votação?")
-            if(y){
-                alert("Votação encerrada")
-                f = true
+            if(s){
+                dataFinal= new Date()
             }
-            
-        }else if (voto == cotcand + 1){
-            y = confirm("Deseja encerrar a votação?")
-            if(y){
-                alert("Voto computado para voto em branco")
-                votoBranco++
-                audioConf.play()
-            }else{
-                v--
+        }else{
+            for (let w = false, i = 0, confirmaVoto = false; w == false; i++){
+                if(i > 4 && voto != 69){
+                    confirmaVoto = confirm("Você confirma o voto nulo?")
+                    if(confirmaVoto){
+                        votoNulo++
+                        await audioConfirmacao();
+                    }else{
+                        v--
+                    }
+                    w=true
+                }else if (voto == 69){
+                    confirmaVoto = confirm("Você confirma o voto branco?")
+                    if(confirmaVoto){
+                        votoBranco++
+                        await audioConfirmacao();
+                    }else{
+                        v--
+                    }
+                    w = true
+                }else{
+                    if(voto == candidatos[i][0]){
+                        confirmaVoto = confirm("Você confirma o voto no candidato "+ candidatos[i][1]+"?")
+                        if (confirmaVoto){
+                            votos[i]++
+                            await audioConfirmacao();
+                        }else {
+                            v--
+                        }
+                        w=true
+                    }
+                }
             }
-            
-        }else if (voto == cotcand + 2){
-            y = confirm("Deseja encerrar a votação?")
-            if(y){
-                alert("Voto computado para voto em branco")
-                votoNulo++
-                audioConf.play()
-            }else{
-                v--
-            }
-        }else {
-            votos[voto]++
-            audioConf.play()
         }
+    }
+    porcentagem = v/100
+    if(v>0){
+        console.clear()
+        console.log("\n")
+        console.log("** BOLETIM DE URNA **")
+        console.log("Inicio da voração: "+ dataInicio)
+        console.log("Termino da voração: "+ dataFinal)
+        console.log("\n")  
+        console.log("TOTAL DE VOTOS: ", v)
+        for(i = 0; i < 5;i++){
+            console.log(candidatos[i][1]+ " terminou com "+ (votos[i]/porcentagem).toFixed(2)+ "% de votos")
+        }
+        console.log("Total votos brancos "+ (votoBranco/porcentagem).toFixed(2)+ "% de votos")
+        console.log("Total votos nulos "+ (votoNulo/porcentagem).toFixed(2)+ "% de votos")
 
+    }else{
+        console.log("Não houve votação nesta urna")
     }
-    let dataFinal = new Date();
-    console.clear()
-    console.log("\n")
-    console.log("** BOLETIM DE URNA **")
-    console.log("Inicio da voração: "+ dataInicio)
-    console.log("Termino da voração: "+ dataFinal)
-    console.log("\n")  
-    console.log("TOTAL DE VOTOS: ", v)
-    porcentagem = (v/100)
-    for(var i = 1; i < candidatos.length;i++){
-        var result = votos[i]
-        console.log(candidatos[i], " terminou com ", (result / porcentagem).toFixed(2), "% de votos")
-    }
-    console.log("Votos em Branco ", (votoBranco/porcentagem).toFixed(2), "% de votos")
-    console.log("Votos nulo ", (votoNulo/porcentagem).toFixed(2), "% de votos")
-    
- }
+
+    verificarIntegridadeUrna().then(verificacao => {
+        if (verificacao.status) {
+            console.log('Hashes verificados, urna íntegra.');
+        } else {
+            console.log('URNA ADULTERADA!');
+            console.log(`Hash da urna: ${verificacao.hashUrnaAtual}`);
+            console.log(`Hash esperado: ${verificacao.hashVerificado}`);
+        }
+        console.log('Fim do programa');
+    });
+}
+
+
+async function config(){
+    senha = prompt("Digite a nova senha")
+    return senha
+}
+
+
+
